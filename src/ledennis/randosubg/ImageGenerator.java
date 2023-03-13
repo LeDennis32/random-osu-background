@@ -15,6 +15,12 @@ public class ImageGenerator {
 	
 	private List<File> foundFiles = new ArrayList<>();
 	
+	private FileLogger logger;
+	
+	public ImageGenerator() {
+		this.logger = new FileLogger("random-osu-bg.log");
+	}
+	
 	public BufferedImage nextImage(String path) {
 		BufferedImage img;
 		while((img = nextImage0(path)) == null) {
@@ -53,6 +59,8 @@ public class ImageGenerator {
 		}
 		lastFile = image;
 		foundFiles.add(image);
+		
+		logger.log(image.getParentFile().getName() + "/" + image.getName());
 		
 		try {
 			return ImageIO.read(image);
