@@ -42,8 +42,14 @@ public class FileLogger {
 	
 	private String now() {
 		ZonedDateTime now = ZonedDateTime.now();
-		return now.getYear() + "-" + now.getMonthValue() + "-" + now.getDayOfMonth()
-			+ " " + now.getHour() + ":" + now.getMinute() + ":" + now.getSecond();
+		return now.getYear() + "-" + add0(now.getMonthValue()) + "-" + add0(now.getDayOfMonth())
+			+ " " + add0(now.getHour()) + ":" + add0(now.getMinute()) + ":" + add0(now.getSecond());
+	}
+	
+	// adds leading 0 to single digit integers
+	private String add0(int i) {
+		if(i < 10) return "0" + i;
+		return String.valueOf(i);
 	}
 	
 }
